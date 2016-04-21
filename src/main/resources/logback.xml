@@ -1,0 +1,27 @@
+<configuration>
+    <timestamp key="bySecond" datePattern="yyyyMMdd'T'HHmmss"/>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%-5level] %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+        <!-- use the previously created timestamp to create a uniquely
+             named log file -->
+        <file>logs/log-${bySecond}.txt</file>
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <logger name="FILE_ONLY" additivity="false">
+        <appender-ref ref="FILE" />
+    </logger>
+
+    <root>
+        <appender-ref ref="STDOUT" />
+        <appender-ref ref="FILE" />
+    </root>
+</configuration>
